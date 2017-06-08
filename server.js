@@ -6,19 +6,19 @@ var path = require('path')
 var app = express()
 var appPort = process.env.PORT || 80
 
-// configure express
+// Configure express
 app.set('view engine', 'pug')
 app.use(express.static('public'))
 
 // Set up camera
+var cameraPath = path.join(os.tmpdir(), 'raspicam', 'camera.jpg')
 var camera = new RaspiCam({
-  silent: true,
   mode: 'timelapse',
   timelapse: 3000,
   timeout: 999999999,
   quality: 10,
   nopreview: true,
-  output: path.join(os.tmpdir(), 'raspicam', 'camera.jpg')
+  output: cameraPath
 })
 
 // Start recording if camera is available
@@ -76,7 +76,7 @@ app.get('/config', function (req, res) {
 
 // Read camera file from /tmp
 app.get('/camera.jpg', function (req, res) {
-  var s = fs.createReadStream(path.join(os.tmpdir(), 'raspicam', 'camera.jpg'))
+  var s = fs.createReadStream(cameraPath)
   s.on('open', function () {
     res.set('Content-Type', 'image/jpeg')
     s.pipe(res)
