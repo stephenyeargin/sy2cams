@@ -1,0 +1,32 @@
+{
+  "name": "simple-server-node",
+  "version": "1.0.0",
+  "description": "A simple Expressjs Web server on resin.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "modprobe bcm2835-v4l2 && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resin-io-projects/simple-server-node.git"
+  },
+  "keywords": [
+    "resin.io",
+    "webserver",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "Shaun Mulligan <shaun@resin.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/resin-io-projects/simple-server-node/issues"
+  },
+  "homepage": "https://github.com/resin-io-projects/simple-server-node#readme",
+  "dependencies": {
+    "express": "*",
+    "jade-bootstrap": "^1.0.14",
+    "pug": "^2.0.0-rc.1",
+    "raspicam": "^0.2.13"
+  }
+}

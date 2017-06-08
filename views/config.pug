@@ -1,0 +1,44 @@
+extends ../node_modules/jade-bootstrap/_bootstrap
+block body
+  .container
+    h1= resinAppName
+    hr
+    p
+      strong Resin Configuration:
+    dl
+      dt resin
+      dd
+        tt #{resin}
+      dt resinAppId
+      dd
+        tt #{resinAppId}
+      dt resinAppName
+      dd
+        tt #{resinAppName}
+      dt resinAppRelease
+      dd
+        tt #{resinAppRelease}
+      dt resinDeviceNameAtInit
+      dd
+        tt #{resinDeviceNameAtInit}
+      dt resinDeviceType
+      dd
+        tt #{resinDeviceType}
+      dt resinDeviceUuid
+      dd
+        tt #{resinDeviceUuid}
+      dt resinHostOsVersion
+      dd
+        tt #{resinHostOsVersion}
+      dt resinSupervisorAddress
+      dd
+        tt #{resinSupervisorAddress}
+      dt resinSupervisorHost
+      dd
+        tt #{resinSupervisorHost}
+      dt resinSupervisorPort
+      dd
+        tt #{resinSupervisorPort}
+      dt resinSupervisorVersion
+      dd
+        tt #{resinSupervisorVersion}
