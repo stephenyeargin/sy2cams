@@ -78,11 +78,15 @@ app.get('/camera.jpg', function (req, res) {
   fs.exists(path.join(os.tmpdir(), 'raspicam', 'camera.jpg'), function (err, stats) {
     if (err) {
       console.log(err)
+      return
     }
+    // Default image
     var cameraPath = path.join('public', 'assets', 'images', 'camera-disconnected.jpg')
+    // If image exists, return it
     if (stats.isFile()) {
       cameraPath = path.join(os.tmpdir(), 'raspicam', 'camera.jpg')
     }
+    // Return image
     res.writeHead(200, {'Content-Type': 'image/jpeg'})
     fs.createReadStream(cameraPath).pipe(res)
   })
