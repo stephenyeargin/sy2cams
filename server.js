@@ -35,7 +35,7 @@ if (process.env.RESIN) {
     if (err) {
       console.log(err)
     } else {
-      console.log('wrote: ' + filename)
+      // console.log('wrote: ' + filename)
     }
   })
 
@@ -75,12 +75,17 @@ app.get('/config', function (req, res) {
 
 // Read camera file from /tmp
 app.get('/camera.jpg', function (req, res) {
-  var cameraPath = path.join('public', 'assets', 'images', 'camera-disconnected.jpg')
-  if (fs.exists(path.join(os.tmpdir(), 'raspicam', 'camera.jpg'))) {
-    cameraPath = path.join(os.tmpdir(), 'raspicam', 'camera.jpg')
-  }
-  res.writeHead(200, {'Content-Type': 'image/jpeg'})
-  fs.createReadStream(cameraPath).pipe(res)
+  fs.exists(path.join(os.tmpdir(), 'raspicam', 'camera.jpg'), function (err, stats) {
+    if (err) {
+      console.log(err)
+    }
+    var cameraPath = path.join('public', 'assets', 'images', 'camera-disconnected.jpg')
+    if (stats.isFile()) {
+      cameraPath = path.join(os.tmpdir(), 'raspicam', 'camera.jpg')
+    }
+    res.writeHead(200, {'Content-Type': 'image/jpeg'})
+    fs.createReadStream(cameraPath).pipe(res)
+  })
 })
 
 // start a server on port app_port and log its start to our console
