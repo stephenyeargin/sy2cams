@@ -33,7 +33,7 @@ if (process.env.RESIN) {
   // When file written to disk
   camera.on('read', function (err, filename) {
     if (err) {
-      console.log(err)
+      console.log('camera.on.read.err', err)
     } else {
       // console.log('wrote: ' + filename)
     }
@@ -77,7 +77,7 @@ app.get('/config', function (req, res) {
 app.get('/camera.jpg', function (req, res) {
   fs.exists(path.join(os.tmpdir(), 'raspicam', 'camera.jpg'), function (err, stats) {
     if (err) {
-      console.log(err)
+      console.log('fs.exists.err', err)
       return
     }
     // Default image
@@ -95,5 +95,5 @@ app.get('/camera.jpg', function (req, res) {
 // start a server on port app_port and log its start to our console
 var server = app.listen(appPort, function () {
   var port = server.address().port
-  console.log('Example app listening on port ', port)
+  console.log('Listening on port:', port)
 })
