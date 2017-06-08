@@ -12,6 +12,7 @@ app.use(express.static('public'))
 
 // Set up camera
 var camera = new RaspiCam({
+  silent: true,
   mode: 'timelapse',
   timelapse: 3000,
   timeout: 999999999,
@@ -75,20 +76,14 @@ app.get('/config', function (req, res) {
 
 // Read camera file from /tmp
 app.get('/camera.jpg', function (req, res) {
-  fs.exists(path.join(os.tmpdir(), 'raspicam', 'camera.jpg'), function (err, stats) {
-    if (err) {
-      console.log('fs.exists.err', err)
-      return
-    }
-    // Default image
-    var cameraPath = path.join('public', 'assets', 'images', 'camera-disconnected.jpg')
-    // If image exists, return it
-    if (stats.isFile()) {
-      cameraPath = path.join(os.tmpdir(), 'raspicam', 'camera.jpg')
-    }
-    // Return image
-    res.writeHead(200, {'Content-Type': 'image/jpeg'})
-    fs.createReadStream(cameraPath).pipe(res)
+  var s = fs.createReadStream(path.join(os.tmpdir(), 'raspicam', 'camera.jpg'))
+  s.on('open', function () {
+    res.set('Content-Type', 'image/jpeg')
+    s.pipe(res)
+  })
+  s.on('error', function () {
+    res.set('Content-Type', 'text/plain')
+    res.status(404).end('Image not found.')
   })
 })
 
