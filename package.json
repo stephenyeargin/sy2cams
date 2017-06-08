@@ -27,6 +27,6 @@
     "express": "*",
     "jade-bootstrap": "^1.0.14",
     "pug": "^2.0.0-rc.1",
-    "raspicam": "^0.2.13"
+    "raspivid": "^1.0.0"
   }
 }
