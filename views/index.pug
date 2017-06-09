@@ -1,4 +1,4 @@
-extends ../node_modules/pug-bootstrap/layouts/starter
+extends ../node_modules/jade-bootstrap/_bootstrap
 
 block body
   include _navbar
@@ -8,7 +8,7 @@ block body
   script(type='text/javascript', src='https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js')
   script.
     var canvas = document.createElement("canvas");
-    document.findElementById('videoPlayer').appendChild(canvas);
+    document.getElementById('videoPlayer').appendChild(canvas);
     var wsavc = new WSAvcPlayer(canvas, "webgl");
     var protocol = window.location.protocol === "https:" ? "wss:" : "ws:"
     wsavc.connect(protocol + '//' + window.location.host + '/video-stream');
