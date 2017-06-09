@@ -1,24 +1,34 @@
+'use strict';
+
 process.on('uncaughtException', function(err) {
   console.log('Caught exception: ' + err);
   console.log(err.stack);
 });
 
+const port = process.env.PORT || 80;
 const express = require('express');
 const raspividStream = require('raspivid-stream');
 
 const app = express();
 const wss = require('express-ws')(app);
 
+// Configuring rendering iamge
+app.set('view engine', 'pug');
+
+// LED Blinking
 const Blinkt = require('node-blinkt');
 const leds = new Blinkt();
 leds.setup();
-
 leds.setAllPixels(255, 255, 255, 1);
 leds.sendUpdate();
 setTimeout(updateLeds, 1000);
 
-app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
+// Home route
+app.get('/', function (req, res) {
+  res.render('index', {});
+});
 
+// Websocket video
 app.ws('/video-stream', (ws, req) => {
     console.log('Client connected');
     updateLeds();
@@ -63,4 +73,4 @@ app.use(function (err, req, res, next) {
   next(err);
 })
 
-app.listen(80, () => console.log('Server started on 80'));
+app.listen(port, () => console.log('Server started on ' + port));
