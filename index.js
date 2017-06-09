@@ -28,7 +28,7 @@ app.ws('/video-stream', (ws, req) => {
       action: 'init',
       width: '960',
       height: '540'
-    }));
+    })), (error) => { if (error) console.error(error); };
 
     var videoStream = raspividStream({ rotation: 180 });
 
