@@ -1,10 +1,14 @@
-html
-  title sy2cams
-  body
-    script(type='text/javascript', src='https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js')
-    script.
-      var canvas = document.createElement("canvas");
-      document.body.appendChild(canvas);
-      var wsavc = new WSAvcPlayer(canvas, "webgl");
-      var protocol = window.location.protocol === "https:" ? "wss:" : "ws:"
-      wsavc.connect(protocol + '//' + window.location.host + '/video-stream');
+extends ../node_modules/pug-bootstrap/layouts/starter
+
+block body
+  include _navbar
+  .container
+    #videoPlayer.block-center
+
+  script(type='text/javascript', src='https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js')
+  script.
+    var canvas = document.createElement("canvas");
+    document.findElementById('videoPlayer').appendChild(canvas);
+    var wsavc = new WSAvcPlayer(canvas, "webgl");
+    var protocol = window.location.protocol === "https:" ? "wss:" : "ws:"
+    wsavc.connect(protocol + '//' + window.location.host + '/video-stream');

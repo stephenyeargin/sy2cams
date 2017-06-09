@@ -19,7 +19,28 @@ app.set('view engine', 'pug');
 
 // Home route
 app.get('/', function (req, res) {
-  res.render('index', {});
+  res.render('index', {
+    title: process.env.RESIN_APP_NAME || '(Not Set)'
+  });
+});
+
+// Configuration route
+app.get('/config', function (req, res) {
+  res.render('config', {
+    resinAppId: process.env.RESIN_APP_ID || '(Not Set)',
+    resinDeviceType: process.env.RESIN_DEVICE_TYPE || '(Not Set)',
+    resin: process.env.RESIN || '(Not Set)',
+    resinSupervisorAddress: process.env.RESIN_SUPERVISOR_ADDRESS || '(Not Set)',
+    resinSupervisorHost: process.env.RESIN_SUPERVISOR_HOST || '(Not Set)',
+    resinDeviceUuid: process.env.RESIN_DEVICE_UUID || '(Not Set)',
+    resinAppRelease: process.env.RESIN_APP_RELEASE || '(Not Set)',
+    resinSupervisorVersion: process.env.RESIN_SUPERVISOR_VERSION || '(Not Set)',
+    resinAppName: process.env.RESIN_APP_NAME || '(Not Set)',
+    resinDeviceNameAtInit: process.env.RESIN_DEVICE_NAME_AT_INIT || '(Not Set)',
+    resinHostOsVersion: process.env.RESIN_HOST_OS_VERSION || '(Not Set)',
+    resinSupervisorPort: process.env.RESIN_SUPERVISOR_PORT || '(Not Set)',
+    title: process.env.RESIN_APP_NAME || '(Not Set)'
+  });
 });
 
 // Websocket video
