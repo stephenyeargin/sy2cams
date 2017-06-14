@@ -3,14 +3,7 @@ extends ../node_modules/pug-bootstrap/_bootstrap
 block body
   include _navbar
   .container
-    .block-center
-      #videoPlayer.embed-responsive.embed-responsive-16by
-
-  script(type='text/javascript', src='https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js')
-  script.
-    var canvas = document.createElement("canvas");
-    canvas.className += "embed-responsive-item block-center";
-    document.getElementById('videoPlayer').appendChild(canvas);
-    var wsavc = new WSAvcPlayer(canvas, "webgl");
-    var protocol = window.location.protocol === "https:" ? "wss:" : "ws:"
-    wsavc.connect(protocol + '//' + window.location.host + '/video-stream');
+    .row
+      .col-md-12
+        .text-center
+          img.center-block.img-responsive(src=imageSource)

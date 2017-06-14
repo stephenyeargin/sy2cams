@@ -1,12 +1,21 @@
 FROM resin/raspberrypi3-node
 
-RUN apt-get update && apt-get install -yq libraspberrypi-bin
+# Motion / etc.
+RUN apt-get -q update && apt-get install -yq --no-install-recommends \
+        motion rsync vim file ssh \
+	&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
-WORKDIR usr/src/app
+# Node App
+RUN apt-get -q update && apt-get install -yq --no-install-recommends \
+        libraspberrypi-bin
+
+WORKDIR /usr/src/app
 
 COPY package.json ./
 RUN JOBS=MAX npm i --production
 
 COPY . ./
 
-CMD npm start
+CMD ["bash", "etc/run-motion.sh"]
+
+CMD ["npm", "start"]
