@@ -1,4 +1,4 @@
-FROM resin/raspberrypi3-node
+FROM resin/%%RESIN_MACHINE_NAME%%-node
 
 # Motion / etc.
 RUN apt-get -q update && apt-get install -yq --no-install-recommends \
