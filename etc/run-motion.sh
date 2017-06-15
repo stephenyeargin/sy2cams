@@ -11,4 +11,4 @@ echo "Ensure we have /data/log and /data/motion for persistence"
 /bin/mkdir -p /data/motion
 
 echo "Running motion..."
-/usr/bin/motion -n -c /etc/motion.conf
+/usr/bin/motion -n -c /usr/src/app/etc/motion.conf
