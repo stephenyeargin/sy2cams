@@ -16,6 +16,4 @@ RUN JOBS=MAX npm i --production
 
 COPY . ./
 
-CMD ["bash", "etc/run-motion.sh"]
-
 CMD ["npm", "start"]
