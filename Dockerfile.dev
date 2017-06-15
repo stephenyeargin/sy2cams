@@ -1,6 +1,4 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-golang:1.6
-
-ENV INITSYSTEM on
+FROM resin/nuc-golang:1.6
 
 RUN apt-get update
 RUN apt-get install -y motion \
