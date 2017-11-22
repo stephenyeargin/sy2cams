@@ -12,6 +12,8 @@ RUN cat /tmp/etc/motion.conf >> /etc/motion/motion.conf
 COPY ./etc/supervisord.conf /etc/supervisord.conf
 
 COPY ./start.sh /
+
+RUN modprobe bcm2835-v4l2
 RUN chmod 755 /start.sh
 
 CMD ["/bin/bash", "/start.sh"]
